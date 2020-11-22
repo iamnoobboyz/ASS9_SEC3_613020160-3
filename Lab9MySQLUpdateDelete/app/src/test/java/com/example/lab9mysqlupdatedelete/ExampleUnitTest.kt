@@ -1,4 +1,4 @@
-package com.myweb.lab9mysqlupdatedelete
+package com.example.lab9mysqlupdatedelete
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.myweb.lab9mysqlupdatedelete
+package com.example.lab9mysqlupdatedelete
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
-        recycler_view.addItemDecoration(
-            DividerItemDecoration(recycler_view.context,
-                DividerItemDecoration.VERTICAL))
+        recycler_view.addItemDecoration(DividerItemDecoration(recycler_view.context,
+        DividerItemDecoration.VERTICAL))
     }
-    override fun onResume() {
+    override fun onResume(){
         super.onResume()
         callStudent()
     }
+
     fun callStudent(){
         studentList.clear()
         createClient.retrieveStudent()
@@ -34,55 +34,46 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<List<Student>>,
                     response: Response<List<Student>>
-                ) {
-                    response.body()?.forEach {
+                ){
+                    response.body()?.forEach{
                         studentList.add(Student(it.std_id, it.std_name, it.std_age))
                     }
-                    recycler_view.adapter = EditStudentsAdapter(studentList, applicationContext)
+                        recycler_view.adapter = EditStudentsAdapter(studentList, applicationContext)
                 }
-                override fun  onFailure(call: Call<List<Student>>, t: Throwable){
+
+                override fun onFailure(call: Call<List<Student>>, t: Throwable) {
                     t.printStackTrace()
-                    Toast.makeText(applicationContext,"Error2", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"Error2",Toast.LENGTH_LONG).show()
                 }
             })
+
     }
-    fun clickSearch(v: View) {
+
+    fun clickSearch(v: View){
         studentList.clear()
         if(edt_search.text.isEmpty()){
             callStudent()
-        }else {
-            createClient.retrieveStudentID(edt_search.text.toString())
-                .enqueue(object : Callback<Student> {
+        }else{
+            createClient.retrieveStudnetID(edt_search.text.toString())
+                .enqueue(object :Callback<Student>{
                     override fun onResponse(call: Call<Student>, response: Response<Student>) {
-                        if (response.isSuccessful) {
-                            studentList.add(
-                                Student(
-                                    response.body()?.std_id.toString(),
-                                    response.body()?.std_name.toString(),
-                                    response.body()?.std_age.toString().toInt()
-                                )
-                            )
-                            recycler_view.adapter =
-                                EditStudentsAdapter(studentList, applicationContext)
-                        } else {
-                            Toast.makeText(
-                                applicationContext,"Student ID Not Found", Toast.LENGTH_LONG).show()
+                        if(response.isSuccessful){
+                           studentList.add(Student(response.body()?.std_id.toString(),
+                                response.body()?.std_name.toString(),
+                               response.body()?.std_age.toString().toInt()
+                               ))
+                            recycler_view.adapter = EditStudentsAdapter(studentList, applicationContext)
+                        }else{
+                            Toast.makeText(applicationContext,"Student ID Not found", Toast.LENGTH_LONG).show()
                         }
                     }
 
                     override fun onFailure(call: Call<Student>, t: Throwable) = t.printStackTrace()
 
+
                 })
         }
+
     }
+
 }
-
-
-
-
-
-
-
-
-
-

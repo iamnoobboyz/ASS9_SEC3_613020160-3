@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +15,8 @@
         android:text="Edit Or Delete Student"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
 
     <EditText
         android:id="@+id/edt_id"
@@ -21,7 +24,7 @@
         android:layout_height="wrap_content"
         android:hint="Input ID"
         android:inputType="text"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/edt_name"
@@ -29,7 +32,7 @@
         android:layout_height="wrap_content"
         android:hint="Input Name"
         android:inputType="text"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/edt_age"
@@ -37,7 +40,7 @@
         android:layout_height="wrap_content"
         android:hint="Input Age"
         android:inputType="number"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -52,8 +55,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#E91E63"
+        android:background="#F88585"
         android:onClick="deleteStudent"
-        android:text="delete"
+        android:text="Delete"
         android:textSize="20sp"/>
+
 </LinearLayout>
